@@ -6,28 +6,50 @@ public class FizzBuzz {
     {
         String output;
 
-        if(args.length == 0) {
-            simple_FizzBuzz local_iterator = new simple_FizzBuzz(1, 101);
+        int starting = 1;
+        int ending = 101;
+        boolean e_arg = false;
+        boolean l_arg = false;
+        for (int i = 0; i < args.length; i++) {
+            switch (args[i]) {
+                case "-e" -> {
+                    if(!l_arg)
+                    {
+                        ending = 106;
+                    }
+                    e_arg = true;
+                }
+                case "-f" -> {
+                    i++;
+                    starting = Integer.parseInt(args[i]);
+                }
+                case "-l" -> {
+                    l_arg = true;
+                    i++;
+                    ending = Integer.parseInt(args[i]);
+                }
+                default -> {
+                    System.out.println("Sorry, \"" + args[i] + "\" is not an argument. This is the list of arguments:");
+                    System.out.println("  -e: Run the extended version of the algorithm.");
+                    System.out.println("  -f <int>: Set the first number of the sequence.");
+                    System.out.println("  -l <int>: Set the last number of the sequence.");
+                    return;
+                }
+            }
+        }
+
+        if(!e_arg)
+        {
+            simple_FizzBuzz local_iterator = new simple_FizzBuzz(starting, ending);
+            do {
+                System.out.println(local_iterator.get());
+            } while (local_iterator.next());
+        } else {
+            extended_FizzBuzz local_iterator = new extended_FizzBuzz(starting, ending);
             do {
                 System.out.println(local_iterator.get());
             } while (local_iterator.next());
         }
-        else if(args.length == 1 && args[0].equals("-e"))
-        {
-            extended_FizzBuzz local_iterator = new extended_FizzBuzz(1,106);
-            do {
-                System.out.println(local_iterator.get());
-            }while(local_iterator.next());
-        }
-        else if(args.length == 1)
-        {
-            System.out.println("Argument \"" + args[0] + "\" not recognised. Please, take a look to the list of arguments:");
-            System.out.println("   -e  Run the algorithm in its extended version");
-        }
-        else
-        {
-            System.out.println("Sorry, only one argument can be provided");
-        }
-
     }
+
 }
