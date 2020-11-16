@@ -66,7 +66,7 @@ public abstract class FizzBuzz_iterator {
     }
 
     //updates the current value of "mask" variable with the "x" value on its Stream representation.
-    void enmask()
+    private void enmask()
     {
         if(mask.equals(""))
         {
